@@ -1,6 +1,6 @@
 @php
  $bulletinRoles = $entity->bulletinRoles();
- $roles = user()->roles->pluck('display_name', 'id')->toArray();
+ $roles = user()->roles->pluck('description', 'id')->toArray();
 @endphp
 <div class="toggle-switch-list dual-column-content">
 <form action="{{ url('/bulletins/toggle') }}" method="POST">
@@ -11,11 +11,11 @@
         <span>@icon(count($bulletinRoles)>0 ? 'star' : 'star-outline')</span>
         <span>{{ trans('common.bulletin') }}</span>
     </button>
-        @foreach ($roles as $id => $name)
+        @foreach ($roles as $id => $description)
         <div>
         @include('form.custom-checkbox', [
             'name' => 'roles[]',
-            'label' => $name,
+            'label' => $description,
             'value' => $id,
             'checked' => in_array($id, $bulletinRoles)
         ])
