@@ -70,4 +70,9 @@ return [
     // Other
     'commented_on'                => '評論',
     'permissions_update'          => '更新權限',
+
+    // Bulletins
+    'bulletin_add_notification' => '":name" 已加入到公告',
+    'bulletin_remove_notification' => '":name" 已從公告移除',
+    'bulletin_sync_notification' => '":name" 已從公告同步',
 ];

@@ -43,6 +43,8 @@ return [
     'fullscreen' => '全螢幕',
     'favourite' => '最愛',
     'unfavourite' => '取消最愛',
+    'bulletin' => '公告',
+    'unbulletin' => '取消公告',
     'next' => '下一頁',
     'previous' => '上一頁',
     'filter_active' => '使用中的過濾器',

@@ -294,6 +294,7 @@ export function build(options) {
             registerAdditionalToolbars(editor, options);
             getSetupCallback(options)(editor);
         },
+        font_family_formats :'微軟正黑體=\'msjhenghei\';Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Courier New=courier new,courier;Georgia=georgia,palatino;Webdings=webdings;Wingdings=wingdings',
     };
 }
 

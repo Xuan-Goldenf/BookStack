@@ -8,6 +8,8 @@ export function getPrimaryToolbar(options) {
     const toolbar = [
         'undo redo',
         'styles',
+        'fontsize',
+        'fontfamily',
         'bold italic underline forecolor backcolor formatoverflow',
         'alignleft aligncenter alignright alignjustify',
         'bullist numlist listoverflow',

@@ -12,6 +12,7 @@ use BookStack\Http\Controllers\ChapterController;
 use BookStack\Http\Controllers\ChapterExportController;
 use BookStack\Http\Controllers\CommentController;
 use BookStack\Http\Controllers\FavouriteController;
+use BookStack\Http\Controllers\BulletinController;
 use BookStack\Http\Controllers\HomeController;
 use BookStack\Http\Controllers\Images;
 use BookStack\Http\Controllers\MaintenanceController;
@@ -204,6 +205,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/favourites', [FavouriteController::class, 'index']);
     Route::post('/favourites/add', [FavouriteController::class, 'add']);
     Route::post('/favourites/remove', [FavouriteController::class, 'remove']);
+
+    // Bulletins
+    Route::get('/bulletins', [BulletinController::class, 'index']);
+    Route::post('/bulletins/toggle', [BulletinController::class, 'toggle']);
+    Route::post('/bulletins/add', [BulletinController::class, 'add']);
+    Route::post('/bulletins/remove', [BulletinController::class, 'remove']);
 
     // Other Pages
     Route::get('/', [HomeController::class, 'index']);

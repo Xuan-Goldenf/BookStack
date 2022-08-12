@@ -6,6 +6,7 @@ use BookStack\Actions\ActivityQueries;
 use BookStack\Entities\Models\Book;
 use BookStack\Entities\Models\Page;
 use BookStack\Entities\Queries\RecentlyViewed;
+use BookStack\Entities\Queries\TopBulletins;
 use BookStack\Entities\Queries\TopFavourites;
 use BookStack\Entities\Repos\BookRepo;
 use BookStack\Entities\Repos\BookshelfRepo;
@@ -36,6 +37,7 @@ class HomeController extends Controller
             (new RecentlyViewed())->run(12 * $recentFactor, 1)
             : Book::visible()->orderBy('created_at', 'desc')->take(12 * $recentFactor)->get();
         $favourites = (new TopFavourites())->run(6);
+        $bulletins = (new TopBulletins())->run(6);
         $recentlyUpdatedPages = Page::visible()->with('book')
             ->where('draft', false)
             ->orderBy('updated_at', 'desc')
@@ -55,6 +57,7 @@ class HomeController extends Controller
             'recentlyUpdatedPages' => $recentlyUpdatedPages,
             'draftPages'           => $draftPages,
             'favourites'           => $favourites,
+            'bulletins'            => $bulletins,
         ];
 
         // Add required list ordering & sorting for books & shelves views.

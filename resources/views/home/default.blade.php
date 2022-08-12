@@ -20,6 +20,18 @@
     <div class="container" id="home-default">
         <div class="grid third gap-xxl no-row-gap" >
             <div>
+                <div id="bulletin">
+                    <div class="card mb-xl">
+                        <h3 class="card-title">{{ trans('entities.bulletin') }}</h3>
+                        <div class="px-m">
+                            @include('entities.list', [
+                            'entities' => $bulletins,
+                            'style' => 'compact',
+                            ])
+                        </div>
+                        <a href="{{ url('/bulletins')  }}" class="card-footer-link">{{ trans('common.view_all') }}</a>
+                    </div>
+                </div>
                 @if(count($draftPages) > 0)
                     <div id="recent-drafts" class="card mb-xl">
                         <h3 class="card-title">{{ trans('entities.my_recent_drafts') }}</h3>
@@ -54,7 +66,6 @@
                         <a href="{{ url('/favourites')  }}" class="card-footer-link">{{ trans('common.view_all') }}</a>
                     </div>
                 @endif
-
                 <div id="recent-pages" class="card mb-xl">
                     <h3 class="card-title">{{ trans('entities.recently_updated_pages') }}</h3>
                     <div id="recently-updated-pages" class="px-m">

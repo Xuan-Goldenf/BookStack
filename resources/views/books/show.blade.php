@@ -141,6 +141,7 @@
 
             @if(signedInUser())
                 @include('entities.favourite-action', ['entity' => $book])
+                @include('entities.bulletin-action', ['entity' => $book])
             @endif
             @if(userCan('content-export'))
                 @include('entities.export-menu', ['entity' => $book])

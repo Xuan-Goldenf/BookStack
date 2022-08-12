@@ -5,14 +5,18 @@ namespace BookStack\Entities\Models;
 use BookStack\Actions\Activity;
 use BookStack\Actions\Comment;
 use BookStack\Actions\Favourite;
+use BookStack\Actions\Bulletin;
 use BookStack\Actions\Tag;
 use BookStack\Actions\View;
 use BookStack\Auth\Permissions\EntityPermission;
 use BookStack\Auth\Permissions\JointPermission;
 use BookStack\Auth\Permissions\JointPermissionBuilder;
 use BookStack\Auth\Permissions\PermissionApplicator;
+use BookStack\Auth\Role;
+use BookStack\Auth\User;
 use BookStack\Entities\Tools\SearchIndex;
 use BookStack\Entities\Tools\SlugGenerator;
+use BookStack\Interfaces\Bulletinable;
 use BookStack\Interfaces\Deletable;
 use BookStack\Interfaces\Favouritable;
 use BookStack\Interfaces\Loggable;
@@ -47,7 +51,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder withLastView()
  * @method static Builder withViewCount()
  */
-abstract class Entity extends Model implements Sluggable, Favouritable, Viewable, Deletable, Loggable
+abstract class Entity extends Model implements Sluggable, Favouritable, Bulletinable, Viewable, Deletable, Loggable
 {
     use SoftDeletes;
     use HasCreatorAndUpdater;
@@ -318,8 +322,46 @@ abstract class Entity extends Model implements Sluggable, Favouritable, Viewable
     /**
      * {@inheritdoc}
      */
+    public function bulletins(): MorphMany
+    {
+        return $this->morphMany(Bulletin::class, 'bulletinable');
+    }
+
+    /**
+     * Check if the entity is a bulletin of the current user.
+     */
+    public function bulletinRoles(): array
+    {
+        return $this->bulletins()->pluck('role_id')->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function logDescriptor(): string
     {
         return "({$this->id}) {$this->name}";
+    }
+
+    /**
+     * Get the current user.
+     */
+    protected function currentUser(): User
+    {
+        return user();
+    }
+
+    /**
+     * Get the roles for the current logged-in user.
+     *
+     * @return int[]
+     */
+    protected function getCurrentUserRoleIds(): array
+    {
+        if (auth()->guest()) {
+            return [Role::getSystemRole('public')->id];
+        }
+
+        return $this->currentUser()->roles->pluck('id')->values()->all();
     }
 }

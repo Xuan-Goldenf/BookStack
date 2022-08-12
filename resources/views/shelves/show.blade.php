@@ -151,6 +151,7 @@
             @if(signedInUser())
                 <hr class="primary-background">
                 @include('entities.favourite-action', ['entity' => $shelf])
+                @include('entities.bulletin-action', ['entity' => $book])
             @endif
 
         </div>
