@@ -72,7 +72,8 @@ class BulletinController extends Controller
     public function toggle(Request $request)
     {
         $bulletinable = $this->getValidatedModelFromRequest($request);
-        $bulletinable->bulletins()->delete();
+        $bulletinable->bulletins()
+            ->whereIn('role_id', $this->getCurrentUserRoleIds())->delete();
         foreach($request->input('roles', []) as $roleID) {
             $bulletinable->bulletins()->firstOrCreate([
                 'role_id' => $roleID,
