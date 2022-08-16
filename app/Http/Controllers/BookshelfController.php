@@ -240,7 +240,7 @@ class BookshelfController extends Controller
         $shelf = $this->shelfRepo->getBySlug($slug);
         $this->checkOwnablePermission('restrictions-manage', $shelf);
 
-        $updateCount = $this->shelfRepo->copyDownPermissions($shelf);
+        $updateCount = $this->shelfRepo->copyDownPermissions($shelf, false);
         $this->showSuccessNotification(trans('entities.shelves_copy_permission_success', ['count' => $updateCount]));
 
         return redirect($shelf->getUrl());
