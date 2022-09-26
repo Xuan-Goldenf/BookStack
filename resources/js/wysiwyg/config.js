@@ -21,6 +21,10 @@ const style_formats = [
     {title: "Blockquote", format: "blockquote"},
     {
         title: "Callouts", items: [
+            {title: "Information Block", format: 'calloutinfo_block'},
+            {title: "Success Block", format: 'calloutsuccess_block'},
+            {title: "Warning Block", format: 'calloutwarning_block'},
+            {title: "Danger Block", format: 'calloutdanger_block'},
             {title: "Information", format: 'calloutinfo'},
             {title: "Success", format: 'calloutsuccess'},
             {title: "Warning", format: 'calloutwarning'},
@@ -33,6 +37,10 @@ const formats = {
     alignleft: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'align-left'},
     aligncenter: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'align-center'},
     alignright: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'align-right'},
+    calloutsuccess_block: {block: 'blockquote', exact: true, attributes: {class: 'callout success'}},
+    calloutinfo_block: {block: 'blockquote', exact: true, attributes: {class: 'callout info'}},
+    calloutwarning_block: {block: 'blockquote', exact: true, attributes: {class: 'callout warning'}},
+    calloutdanger_block: {block: 'blockquote', exact: true, attributes: {class: 'callout danger'}},
     calloutsuccess: {block: 'p', exact: true, attributes: {class: 'callout success'}},
     calloutinfo: {block: 'p', exact: true, attributes: {class: 'callout info'}},
     calloutwarning: {block: 'p', exact: true, attributes: {class: 'callout warning'}},
